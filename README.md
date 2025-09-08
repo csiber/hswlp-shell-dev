@@ -1,96 +1,71 @@
-# HSWLP:Next – Cloudflare alapú újgenerációs SaaS rendszer
+# HSWLP:Dev – Collaborative Developer Hub
 
-Ez a repository a HSWLP platform `hswlp-next` nevű **új alaprendszere**, amelyre a különböző frontend rétegek (ún. **shellek**) épülnek. A rendszer teljesen Cloudflare-infrastruktúrán fut (Workers, D1, R2, KV), és készen áll SaaS alkalmazások hosztolására – külön back-end nélkül.
+**HSWLP:Dev** is a planned community-driven developer platform within the  
+**HSWLP (Hybrid Service Workflow Launch Platform)** ecosystem.  
 
-Ez az alap biztosítja a következőket:
-
-- Bejelentkezés, regisztráció, email hitelesítés
-- Turnstile captcha
-- Cloudflare D1 adatbázis migrációkkal
-- R2 tárhely és KV session kezelés
-- Stripe integráció és emailküldés (Resend vagy Brevo)
-- Alkalmas Cloudflare Pages és Edge funkciók kiszolgálására
+The goal is to provide a **central hub for developers** to collaborate,  
+share knowledge, and launch projects – all powered by Cloudflare’s  
+serverless infrastructure.  
 
 ---
 
-## Használat lokálisan
+## ✨ Vision
 
-1. Telepítés:
-
-   ```bash
-   pnpm install
-   ```
-
-2. Környezeti változók:
-
-   - Másold le a `.env.example` fájlt `.env` néven, majd töltsd ki.
-   - Ha használod: `.dev.vars.example` → `.dev.vars`
-
-3. Lokális migráció és indítás:
-
-   ```bash
-   pnpm db:migrate:dev
-   pnpm dev
-   ```
-
-4. Nyisd meg a böngészőben:
-   [http://localhost:3000](http://localhost:3000)
+- 👥 **Community Projects** – create, manage, and showcase developer projects  
+- 📖 **Documentation Hub** – share tutorials, guides, and technical docs  
+- 🛠️ **Collaboration Tools** – discussions, code snippets, and integrations  
+- 🎓 **Mentorship & Learning** – onboarding for junior developers  
+- ☁️ **Cloudflare-Native** – scalable and lightweight SaaS foundation  
 
 ---
 
-## Cloudflare deploy
+## 🛠️ Planned Architecture
 
-A rendszer automatikusan deployolható Cloudflare Workers-re:
-
-```bash
-pnpm run deploy
-```
-
-Ez lefuttatja az `opennext:build` és `opennextjs-cloudflare deploy` parancsokat, majd feltölti:
-
-- a Worker kódot
-- statikus asseteket (R2)
-- titkos környezeti változókat (`wrangler secret put`)
-- valamint a `wrangler.json` alapján hozzárendeli:
-  - D1 adatbázist
-  - KV namespace-eket
-  - R2 bucketet
-
-A `.env` fájl NEM kerül automatikusan feltöltésre – a titkos adatokat külön kell beállítani `wrangler secret put` paranccsal vagy a Cloudflare dashboardon.
+- **Frontend:** Next.js (React, TailwindCSS)  
+- **Backend:** Cloudflare Workers (API + auth)  
+- **Database:** D1 (projects, users, docs)  
+- **Storage:** R2 (assets, code snippets, media)  
+- **Sessions:** KV for authentication & caching  
+- **Payments:** Stripe integration (optional premium features)  
 
 ---
 
-## Fontos konfigurációs helyek
+## 📅 Current Status
 
-- Állandók: `src/constants.ts`
-- Email sablonok: `src/react-email/`
-- Globális CSS: `src/app/globals.css`
-- Meta adatok: `src/app/layout.tsx`
-- Wrangler config: `wrangler.json`
+🚧 **Concept stage** – HSWLP:Dev is currently under planning.  
+This repository serves as the base for future prototypes and experiments.  
 
 ---
 
-## Email sablonok előnézete
+## 📌 Roadmap
 
-```bash
-pnpm email:dev
-```
+- [ ] Core user authentication & profiles  
+- [ ] Project creation and showcase module  
+- [ ] Documentation & guide sharing  
+- [ ] Community discussions & comments  
+- [ ] Mentorship / learning portal  
+- [ ] Integration with other HSWLP apps  
 
-→ [http://localhost:3001](http://localhost:3001)
+---
+
+## 🌍 Part of the HSWLP Ecosystem
+
+HSWLP:Dev is one piece of the **HSWLP** initiative, alongside:  
+- **Yume** – music & image sharing  
+- **Otokai** – AI-powered music streaming  
+- **HSWLP:Talk** – video conferencing  
+- **SynapseOS** – browser-based AI desktop  
+
+Together, these projects showcase how Cloudflare-native technology  
+can support communities, creativity, and collaboration.  
 
 ---
 
-## A rendszer jövője
+## 📜 License
 
-A `hswlp-next` az alapja minden jövőbeli HSWLP shellnek, ideértve:
-
-- `HSWLP:Cloud` (statikus site deploy)
-- `HSWLP:NAS` (helyi Docker stack manager)
-- `HSWLP:Dev` (fejlesztői központ)
-- `HSWLP:Store` (sablon piactér)
-- `HSWLP:Academy` (oktatási modul)
-
-Egy közös rendszer, több célra.
-Tisztán, Cloudflare-alapon.
+Released under the **MIT License**.  
 
 ---
+
+**HSWLP:Dev** envisions a future where developers can **collaborate, learn,  
+and build together** on a platform that’s clean, scalable, and serverless.  
