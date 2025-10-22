@@ -1,9 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import type { Route } from 'next'
 import { usePathname } from "next/navigation"
-import { ComponentIcon, Menu } from 'lucide-react'
+import { ComponentIcon, Menu, PenSquare } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useSessionStore } from "@/state/session"
@@ -11,29 +10,11 @@ import { cn } from "@/lib/utils"
 import { useNavStore } from "@/state/nav"
 import { Skeleton } from "@/components/ui/skeleton"
 import { SITE_NAME } from "@/constants"
+import { UserMenu } from "./navigation/user-menu"
 
 type NavItem = {
   name: string;
-  href: Route;
-}
-
-const ActionButtons = () => {
-  const { session, isLoading } = useSessionStore()
-  const { setIsOpen } = useNavStore()
-
-  if (isLoading) {
-    return <Skeleton className="h-10 w-[80px] bg-primary" />
-  }
-
-  if (session) {
-    return null;
-  }
-
-  return (
-    <Button asChild onClick={() => setIsOpen(false)}>
-      <Link href="/sign-in">Sign in</Link>
-    </Button>
-  )
+  href: string;
 }
 
 export function Navigation() {
@@ -42,11 +23,8 @@ export function Navigation() {
   const pathname = usePathname()
 
   const navItems: NavItem[] = [
-    { name: "Home", href: "/" },
-    ...(session ? [
-      { name: "Settings", href: "/settings" },
-      { name: "Dashboard", href: "/dashboard" },
-    ] as NavItem[] : []),
+    { name: "Feed", href: "/" },
+    { name: "Explore", href: "/explore" },
   ]
 
   const isActiveLink = (itemHref: string) => {
@@ -72,7 +50,6 @@ export function Navigation() {
                 <>
                   <Skeleton className="h-8 w-16" />
                   <Skeleton className="h-8 w-16" />
-                  <Skeleton className="h-8 w-16" />
                 </>
               ) : (
                 navItems.map((item) => (
@@ -89,7 +66,26 @@ export function Navigation() {
                 ))
               )}
             </div>
-            <ActionButtons />
+            {isLoading ? (
+              <div className="flex items-center gap-3">
+                <Skeleton className="h-10 w-[120px]" />
+                <Skeleton className="h-10 w-10 rounded-full" />
+              </div>
+            ) : session ? (
+              <div className="flex items-center gap-3">
+                <Button asChild className="gap-2">
+                  <Link href="/#share-update" className="flex items-center gap-2">
+                    <PenSquare className="h-4 w-4" />
+                    Share update
+                  </Link>
+                </Button>
+                <UserMenu />
+              </div>
+            ) : (
+              <Button asChild>
+                <Link href="/sign-in">Sign in</Link>
+              </Button>
+            )}
           </div>
           <div className="md:hidden flex items-center">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -123,8 +119,26 @@ export function Navigation() {
                             {item.name}
                           </Link>
                         ))}
-                        <div className="px-3 pt-4">
-                          <ActionButtons />
+                        <div className="px-3 pt-4 space-y-3">
+                          {session ? (
+                            <>
+                              <Button
+                                asChild
+                                className="w-full gap-2"
+                                onClick={() => setIsOpen(false)}
+                              >
+                                <Link href="/#share-update" className="flex items-center justify-center gap-2">
+                                  <PenSquare className="h-4 w-4" />
+                                  Share update
+                                </Link>
+                              </Button>
+                              <UserMenu variant="mobile" onNavigate={() => setIsOpen(false)} />
+                            </>
+                          ) : (
+                            <Button asChild onClick={() => setIsOpen(false)} className="w-full">
+                              <Link href="/sign-in">Sign in</Link>
+                            </Button>
+                          )}
                         </div>
                       </>
                     )}
