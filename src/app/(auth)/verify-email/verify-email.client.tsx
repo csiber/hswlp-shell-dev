@@ -9,12 +9,14 @@ import { useServerAction } from "zsa-react";
 import { verifyEmailAction } from "./verify-email.action";
 import { verifyEmailSchema } from "@/schemas/verify-email.schema";
 import { Spinner } from "@/components/ui/spinner";
-import { REDIRECT_AFTER_SIGN_IN } from "@/constants";
+import { resolveRedirectPath } from "@/utils/redirect";
 
 export default function VerifyEmailClientComponent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
+  const redirectParam = searchParams.get("redirect");
+  const redirectPath = resolveRedirectPath(redirectParam);
   const hasCalledVerification = useRef(false);
 
   const { execute: handleVerification, isPending, error } = useServerAction(verifyEmailAction, {
@@ -32,7 +34,7 @@ export default function VerifyEmailClientComponent() {
       router.refresh();
 
       setTimeout(() => {
-        router.push(REDIRECT_AFTER_SIGN_IN);
+        router.push(redirectPath);
       }, 500);
     },
   });
