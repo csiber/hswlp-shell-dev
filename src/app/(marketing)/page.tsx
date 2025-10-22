@@ -1,9 +1,7 @@
 import { Metadata } from "next";
-import { Hero } from "@/components/landing/hero";
-import { Features } from "@/components/landing/features";
-import { FAQ } from "@/components/landing/faq";
-import { Packages } from "@/components/landing/packages";
-import { SITE_NAME, SITE_DESCRIPTION } from "@/constants";
+
+import { SITE_DESCRIPTION, SITE_NAME } from "@/constants";
+import { FeedPage } from "@/components/feed/feed-page";
 
 export const metadata: Metadata = {
   title: SITE_NAME,
@@ -11,12 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return (
-    <main>
-      <Hero />
-      <Features />
-      <Packages />
-      <FAQ />
-    </main>
-  );
+  return <FeedPage />;
 }
