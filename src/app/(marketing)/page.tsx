@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Hero } from "@/components/landing/hero";
 import { Features } from "@/components/landing/features";
 import { FAQ } from "@/components/landing/faq";
+import { Packages } from "@/components/landing/packages";
 import { SITE_NAME, SITE_DESCRIPTION } from "@/constants";
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export default function Home() {
     <main>
       <Hero />
       <Features />
+      <Packages />
       <FAQ />
     </main>
   );

@@ -14,29 +14,37 @@ export function Hero() {
           <div className="mx-auto max-w-2xl text-center">
             <div className="mb-10 flex justify-center gap-4 flex-wrap">
               <ShinyButton className="rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 ring-1 ring-inset ring-indigo-500/20">
-                100% free and open source
+                Community built · Közösség építette
               </ShinyButton>
               <Suspense fallback={<TotalUsersButtonSkeleton />}>
                 <TotalUsersButton />
               </Suspense>
             </div>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
-                Production-ready SaaS template
-              </h1>
-              <p className="mt-6 text-lg leading-8 text-muted-foreground">
-                Modern, open-source template for quickly launching SaaS apps with Next.js 15 and Cloudflare Workers.
-              </p>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
+              The developer commons for building together
+            </h1>
+            <p className="mt-6 text-lg leading-8 text-muted-foreground">
+              Share ideas, showcase projects, and mentor fellow makers across web, game, and experimental tech in one open hub.
+            </p>
+            <p className="mt-3 text-base leading-7 text-muted-foreground" lang="hu">
+              Oszd meg ötleteidet, mutasd be projektjeidet és támogasd fejlesztőtársaidat a webes, játék- és kísérleti technológiák világából egyetlen nyílt közösségi térben.
+            </p>
             <div className="mt-10 flex items-center justify-center gap-x-4 md:gap-x-6">
-              <a href={GITHUB_REPO_URL} target="_blank">
+              <Link href="/sign-up">
                 <Button size="lg" className="rounded-full">
-                  View on GitHub
-                </Button>
-              </a>
-              <Link href="/sign-in">
-                <Button variant="outline" size="lg" className="rounded-full">
-                  Try the demo
+                  Join the community · Csatlakozz a közösséghez
                 </Button>
               </Link>
+              <Link href="#packages">
+                <Button variant="outline" size="lg" className="rounded-full">
+                  Explore packages · Fejlesztési csomagok
+                </Button>
+              </Link>
+              <a href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">
+                <Button variant="ghost" size="lg" className="rounded-full">
+                  GitHub roadmap
+                </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -53,7 +61,7 @@ async function TotalUsersButton() {
 
   return (
     <ShinyButton className="rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 ring-1 ring-inset ring-purple-500/20">
-      {totalUsers} users and growing
+      {totalUsers}+ developers worldwide · {totalUsers}+ fejlesztő világszerte
     </ShinyButton>
   );
 }
