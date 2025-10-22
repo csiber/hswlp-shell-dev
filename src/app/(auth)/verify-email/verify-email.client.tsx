@@ -16,7 +16,7 @@ export default function VerifyEmailClientComponent() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const redirectParam = searchParams.get("redirect");
-  const redirectPath = resolveRedirectPath(redirectParam);
+  const redirectPath = resolveRedirectPath(redirectParam ?? undefined);
   const hasCalledVerification = useRef(false);
 
   const { execute: handleVerification, isPending, error } = useServerAction(verifyEmailAction, {
