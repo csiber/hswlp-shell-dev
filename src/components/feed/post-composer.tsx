@@ -26,6 +26,7 @@ export function PostComposer() {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const composerId = "share-update";
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -79,7 +80,7 @@ export function PostComposer() {
 
   if (isLoading) {
     return (
-      <Card>
+      <Card id={composerId}>
         <CardHeader>
           <CardTitle className="text-lg">Preparing your workspace…</CardTitle>
           <CardDescription>
@@ -95,7 +96,7 @@ export function PostComposer() {
 
   if (!session) {
     return (
-      <Card>
+      <Card id={composerId}>
         <CardHeader>
           <CardTitle className="text-lg">Sign in to share</CardTitle>
           <CardDescription>
@@ -112,7 +113,7 @@ export function PostComposer() {
   }
 
   return (
-    <Card>
+    <Card id={composerId}>
       <form onSubmit={handleSubmit} className="space-y-0">
         <CardHeader>
           <CardTitle className="text-lg">Share something the community should see</CardTitle>
