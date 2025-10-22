@@ -1,15 +1,17 @@
+import type { Route } from "next";
+
 import { REDIRECT_AFTER_SIGN_IN } from "@/constants";
 
 export function resolveRedirectPath(
-  redirectParam: string | undefined,
-  fallback: string = REDIRECT_AFTER_SIGN_IN,
-): string {
+  redirectParam: string | null | undefined,
+  fallback: Route = REDIRECT_AFTER_SIGN_IN,
+): Route {
   if (!redirectParam) {
     return fallback;
   }
 
   if (redirectParam.startsWith("/") && !redirectParam.startsWith("//")) {
-    return redirectParam;
+    return redirectParam as Route;
   }
 
   return fallback;

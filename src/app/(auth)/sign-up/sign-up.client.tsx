@@ -18,6 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { useServerAction } from "zsa-react";
 import Link from "next/link";
+import type { Route } from "next";
 import { useState } from "react";
 import { startRegistration } from "@simplewebauthn/browser";
 import { KeyIcon } from 'lucide-react'
@@ -25,7 +26,7 @@ import { useConfigStore } from "@/state/config";
 import { REDIRECT_AFTER_SIGN_IN } from "@/constants";
 
 interface SignUpClientProps {
-  redirectPath: string;
+  redirectPath: Route;
 }
 
 const SignUpPage = ({ redirectPath }: SignUpClientProps) => {

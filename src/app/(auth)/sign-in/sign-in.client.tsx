@@ -3,6 +3,7 @@
 import { signInAction } from "./sign-in.actions";
 import { type SignInSchema, signInSchema } from "@/schemas/signin.schema";
 import { type ReactNode, useState } from "react";
+import type { Route } from "next";
 
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -20,14 +21,14 @@ import { startAuthentication } from "@simplewebauthn/browser";
 import type { PublicKeyCredentialRequestOptionsJSON } from "@simplewebauthn/types";
 
 interface SignInClientProps {
-  redirectPath: string;
+  redirectPath: Route;
 }
 
 interface PasskeyAuthenticationButtonProps {
   className?: string;
   disabled?: boolean;
   children?: ReactNode;
-  redirectPath: string;
+  redirectPath: Route;
 }
 
 function PasskeyAuthenticationButton({ className, disabled, children, redirectPath }: PasskeyAuthenticationButtonProps) {

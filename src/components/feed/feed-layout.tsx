@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
 
 import type { Post } from "@/db/schema";
@@ -75,14 +74,14 @@ export function FeedLayout({ posts, composer }: FeedLayoutProps) {
             <CardContent className="space-y-4">
               {quickLinks.map((link) => (
                 <div key={link.title} className="rounded-md border border-border/60 p-3">
-                  <Link
+                  <a
                     href={link.href}
                     target="_blank"
                     rel="noreferrer noopener"
                     className="text-sm font-semibold text-primary hover:underline"
                   >
                     {link.title}
-                  </Link>
+                  </a>
                   <p className="mt-1 text-sm text-muted-foreground">{link.description}</p>
                 </div>
               ))}
