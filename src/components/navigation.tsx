@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import type { Route } from "next"
 import { ComponentIcon, Menu, PenSquare } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -14,7 +15,7 @@ import { UserMenu } from "./navigation/user-menu"
 
 type NavItem = {
   name: string;
-  href: string;
+  href: Route;
 }
 
 export function Navigation() {
@@ -27,7 +28,7 @@ export function Navigation() {
     { name: "Explore", href: "/explore" },
   ]
 
-  const isActiveLink = (itemHref: string) => {
+  const isActiveLink = (itemHref: Route) => {
     if (itemHref === "/") {
       return pathname === "/"
     }
