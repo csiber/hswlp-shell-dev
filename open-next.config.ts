@@ -3,9 +3,33 @@ import kvIncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cac
 import d1NextTagCache from "@opennextjs/cloudflare/overrides/tag-cache/d1-next-tag-cache";
 import doQueue from "@opennextjs/cloudflare/overrides/queue/do-queue";
 
-export default defineCloudflareConfig({
-  incrementalCache: kvIncrementalCache,
-  tagCache: d1NextTagCache,
-  queue: doQueue,
-  enableCacheInterception: true
+const incrementalCache = kvIncrementalCache;
+const tagCache = d1NextTagCache;
+const queue = doQueue;
+
+const baseConfig = defineCloudflareConfig({
+  incrementalCache,
+  tagCache,
+  queue,
+  enableCacheInterception: true,
 });
+
+export default {
+  ...baseConfig,
+  functions: {
+    apiPostsEdge: {
+      runtime: "edge",
+      placement: "global",
+      routes: ["app/api/posts/route"],
+      patterns: ["/api/posts", "/api/posts/*"],
+      override: {
+        wrapper: "cloudflare-edge",
+        converter: "edge",
+        proxyExternalRequest: "fetch",
+        incrementalCache,
+        tagCache,
+        queue,
+      },
+    },
+  },
+};
