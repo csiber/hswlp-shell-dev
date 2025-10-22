@@ -84,8 +84,8 @@ export const PLUGIN_DEFINITIONS: PluginDefinition[] = [
     tags: ["slack", "bot", "összefoglaló"],
     featured: true,
     action: {
-      label: "Telepítés",
-      href: "/dashboard/integrations/slack",
+      label: "Beállítás megnyitása",
+      href: "/settings/integrations#slack-standup",
     },
   },
   {
@@ -147,8 +147,8 @@ export const PLUGIN_DEFINITIONS: PluginDefinition[] = [
     status: "stable",
     tags: ["vercel", "preview", "release"],
     action: {
-      label: "Aktiválás",
-      href: "/dashboard/integrations/vercel",
+      label: "Beállítás megnyitása",
+      href: "/settings/integrations#vercel-preview-sync",
     },
   },
   {

@@ -8,7 +8,8 @@ import {
   User,
   Smartphone,
   Lock,
-  LogOut
+  LogOut,
+  PlugZap,
 } from "lucide-react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import {
@@ -47,6 +48,11 @@ const sidebarNavItems: SidebarNavItem[] = [
     title: "Sessions",
     href: "/settings/sessions",
     icon: Smartphone,
+  },
+  {
+    title: "Integrations",
+    href: "/settings/integrations",
+    icon: PlugZap,
   },
   {
     title: "Change Password",
