@@ -14,6 +14,9 @@
   ],
   // Minification helps to keep the Worker bundle size down and improve start up time.
   "minify": true,
+  "build": {
+    "command": "pnpm run opennext:build"
+  },
   "assets": {
     "binding": "ASSETS",
     "directory": ".open-next/assets"
