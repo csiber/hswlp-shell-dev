@@ -80,14 +80,18 @@ export function PostComposer() {
 
   if (isLoading) {
     return (
-      <Card id={composerId}>
-        <CardHeader>
-          <CardTitle className="text-lg">Preparing your workspace…</CardTitle>
-          <CardDescription>
+      <Card
+        id={composerId}
+        className="aurora-panel relative overflow-hidden border border-border/60 px-6 py-6 text-sm text-muted-foreground"
+      >
+        <div className="pointer-events-none absolute -top-16 right-10 h-36 w-36 rounded-full bg-sky-500/20 blur-3xl" />
+        <CardHeader className="glow-divider pb-6">
+          <CardTitle className="text-xl font-semibold text-foreground">Preparing your workspace…</CardTitle>
+          <CardDescription className="max-w-lg text-sm text-muted-foreground">
             We are verifying your session so you can jump straight into the conversation.
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="py-6">
           <Spinner />
         </CardContent>
       </Card>
@@ -96,15 +100,19 @@ export function PostComposer() {
 
   if (!session) {
     return (
-      <Card id={composerId}>
-        <CardHeader>
-          <CardTitle className="text-lg">Sign in to share</CardTitle>
-          <CardDescription>
+      <Card
+        id={composerId}
+        className="aurora-panel relative overflow-hidden border border-border/60 px-6 py-6 text-sm text-muted-foreground"
+      >
+        <div className="pointer-events-none absolute -top-16 right-10 h-36 w-36 rounded-full bg-fuchsia-500/20 blur-3xl" />
+        <CardHeader className="glow-divider pb-6">
+          <CardTitle className="text-xl font-semibold text-foreground">Sign in to share</CardTitle>
+          <CardDescription className="max-w-lg text-sm text-muted-foreground">
             Join the community to post milestones, request feedback, and follow other builders.
           </CardDescription>
         </CardHeader>
-        <CardFooter>
-          <Button asChild>
+        <CardFooter className="pt-6">
+          <Button asChild className="relative overflow-hidden bg-gradient-to-r from-sky-500 via-indigo-500 to-fuchsia-500 text-sm font-semibold text-white shadow-[0_20px_40px_-28px_rgba(56,189,248,0.7)] transition-transform duration-300 hover:scale-[1.02]">
             <Link href="/sign-in">Sign in</Link>
           </Button>
         </CardFooter>
@@ -113,15 +121,29 @@ export function PostComposer() {
   }
 
   return (
-    <Card id={composerId}>
+    <Card
+      id={composerId}
+      className="aurora-panel relative overflow-hidden border border-border/60 px-6 py-6 text-sm text-muted-foreground"
+    >
+      <div className="pointer-events-none absolute -top-20 left-8 h-48 w-48 rounded-full bg-sky-500/15 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-24 right-6 h-52 w-52 rounded-full bg-purple-500/15 blur-3xl" />
       <form onSubmit={handleSubmit} className="space-y-0">
-        <CardHeader>
-          <CardTitle className="text-lg">Share something the community should see</CardTitle>
-          <CardDescription>
-            Highlight what you shipped, what you are exploring next, or ask for targeted help.
-          </CardDescription>
+        <CardHeader className="glow-divider pb-6">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <CardTitle className="text-2xl font-semibold text-foreground">
+                Share something the community should see
+              </CardTitle>
+              <CardDescription className="max-w-xl text-sm text-muted-foreground">
+                Highlight what you shipped, what you are exploring next, or ask for targeted help.
+              </CardDescription>
+            </div>
+            <span className="rounded-full border border-sky-400/40 bg-sky-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-sky-100">
+              Live
+            </span>
+          </div>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-5">
           <div className="space-y-2">
             <label className="text-sm font-medium" htmlFor="post-title">
               Headline
@@ -134,6 +156,7 @@ export function PostComposer() {
               disabled={isSubmitting || isPending}
               maxLength={255}
               required
+              className="border border-border/60 bg-background/80 text-sm transition-all duration-300 focus-visible:border-sky-500 focus-visible:ring-2 focus-visible:ring-sky-500/30"
             />
           </div>
           <div className="space-y-2">
@@ -147,16 +170,24 @@ export function PostComposer() {
               onChange={(event) => setContent(event.target.value)}
               disabled={isSubmitting || isPending}
               rows={5}
+              className="border border-border/60 bg-background/80 text-sm transition-all duration-300 focus-visible:border-sky-500 focus-visible:ring-2 focus-visible:ring-sky-500/30"
             />
           </div>
           {error ? <p className="text-sm text-destructive">{error}</p> : null}
         </CardContent>
-        <CardFooter className="flex items-center justify-between">
-          <p className="text-xs text-muted-foreground">
+        <CardFooter className="flex flex-col gap-4 border-t border-border/60 pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <p>
             Posts are visible to every signed-in builder and the wider public feed.
           </p>
-          <Button type="submit" disabled={isSubmitting || isPending}>
-            {isSubmitting || isPending ? "Publishing…" : "Publish update"}
+          <Button
+            type="submit"
+            disabled={isSubmitting || isPending}
+            className="group relative overflow-hidden bg-gradient-to-r from-sky-500 via-indigo-500 to-fuchsia-500 px-6 text-sm font-semibold text-white shadow-[0_20px_40px_-28px_rgba(56,189,248,0.7)] transition-transform duration-300 hover:scale-[1.03] disabled:opacity-70"
+          >
+            <span className="relative z-10">
+              {isSubmitting || isPending ? "Publishing…" : "Publish update"}
+            </span>
+            <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.35),transparent_55%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           </Button>
         </CardFooter>
       </form>
