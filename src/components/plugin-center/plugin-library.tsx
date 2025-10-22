@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import { useMemo, useState } from "react"
 
 import { Badge } from "@/components/ui/badge"
@@ -140,7 +139,7 @@ export function PluginLibrary({ plugins }: { plugins: PluginDefinition[] }) {
                     variant="secondary"
                     className="group rounded-full"
                   >
-                    <Link
+                    <a
                       href={plugin.action.href}
                       target={plugin.action.target}
                       rel={
@@ -148,7 +147,7 @@ export function PluginLibrary({ plugins }: { plugins: PluginDefinition[] }) {
                       }
                     >
                       {plugin.action.label}
-                    </Link>
+                    </a>
                   </Button>
                 ) : (
                   <Button variant="ghost" className="rounded-full" disabled>
