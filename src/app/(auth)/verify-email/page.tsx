@@ -3,6 +3,7 @@ import { getSessionFromCookie } from "@/utils/auth";
 import { redirect } from "next/navigation";
 import VerifyEmailClientComponent from "./verify-email.client";
 import { REDIRECT_AFTER_SIGN_IN } from "@/constants";
+import { resolveRedirectPath } from "@/utils/redirect";
 
 export const metadata: Metadata = {
   title: "Verify Email",
@@ -12,13 +13,16 @@ export const metadata: Metadata = {
 export default async function VerifyEmailPage({
   searchParams,
 }: {
-  searchParams: Promise<{ token?: string }>;
+  searchParams: Promise<{ token?: string; redirect?: string }>;
 }) {
+  const params = await searchParams;
   const session = await getSessionFromCookie();
-  const token = (await searchParams).token;
+  const token = params.token;
+  const redirectParam = params.redirect;
+  const redirectPath = resolveRedirectPath(redirectParam, REDIRECT_AFTER_SIGN_IN);
 
   if (session?.user.emailVerified) {
-    return redirect(REDIRECT_AFTER_SIGN_IN);
+    return redirect(redirectPath);
   }
 
   if (!token) {

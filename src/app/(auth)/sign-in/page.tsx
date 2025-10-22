@@ -3,6 +3,7 @@ import { getSessionFromCookie } from "@/utils/auth";
 import { redirect } from "next/navigation";
 import SignInClientPage from "./sign-in.client";
 import { REDIRECT_AFTER_SIGN_IN } from "@/constants";
+import { resolveRedirectPath } from "@/utils/redirect";
 
 export const metadata: Metadata = {
   title: "Sign in",
@@ -14,9 +15,10 @@ const SignInPage = async ({
 }: {
   searchParams: Promise<{ redirect?: string }>;
 }) => {
-  const { redirect: redirectParam } = await searchParams;
+  const params = await searchParams;
+  const redirectParam = params.redirect;
   const session = await getSessionFromCookie();
-  const redirectPath = redirectParam ?? REDIRECT_AFTER_SIGN_IN as unknown as string;
+  const redirectPath = resolveRedirectPath(redirectParam, REDIRECT_AFTER_SIGN_IN);
 
   if (session) {
     return redirect(redirectPath);
